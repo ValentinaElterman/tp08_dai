@@ -34,12 +34,13 @@ router.post('', async (req, res) => {
     {
         respuesta = res.status(400).send("El nombre es obligatorio y debe tener al menos 3 letras.");
     }
-    
-    try {
+    else {
+        try {
         const returnArray = await svc.createAsync(provinceData);
         respuesta = res.status(201).json(returnArray);
     } catch (error) {
         respuesta = res.status(400).send("Error, no se pudo crear la provincia.");
+    }
     }
     return respuesta; 
 });
