@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
-import ProvinceRouter from "./src/controllers/province-controller"
+import ProvinceRouter from "./src/controllers/province-controller.js"
 
 const app = express();
-const post = 3000;
+const port = 3000;
 
-app.use(corse());
-app.use(express.jason());
+app.use(cors());
+app.use(express.json());
 
 app.use("/api/province", ProvinceRouter);
 
