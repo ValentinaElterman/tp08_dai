@@ -1,0 +1,11 @@
+DB_HOST = localhost
+DB_DATABASE = dai-events
+DB_USER = postgres
+DB_PASSWORD = root
+DB_PORT = 5432
+
+# LOGHELPER 
+LOG_FILE_PATH = "D:/temp/logs/" 
+LOG_FILE_NAME = "archivo.log" 
+LOG_TO_FILE_ENABLED = "true" 
+LOG_TO_CONSOLE_ENABLED  = "true"
