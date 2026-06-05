@@ -1,6 +1,7 @@
 import {Router} from 'express';
 import express from 'express';
-import ProvinceService from './../services/province-service.js'
+import ProvinceService from './../services/province-service.js';
+import logHelper from './../helpers/validaciones-helper.js';
 
 const router = Router();
 router.use(express.json()); 
@@ -45,7 +46,7 @@ router.post('', async (req, res) => {
         await svc.createAsync(provinceData);
         return res.status(201).send("Creado correctamente.");
     } catch (error) {
-        console.log(error);
+        logHelper.logError(error);
         return res.status(400).send("Error, no se pudo crear la provincia.");
     }
 });
@@ -69,7 +70,7 @@ router.put('', async (req, res) => {
             return res.status(404).send("No existe una provincia con ese id.");
         }
     } catch (error) {   
-        console.log(error);
+        logHelper.logError(error);
         return res.status(400).send("Error, no se pudo actualizar la provincia.");
     }
 });
