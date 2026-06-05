@@ -1,7 +1,10 @@
 import {Router} from 'express';
+import express from 'express';
 import ProvinceService from './../services/province-service.js'
 
 const router = Router();
+router.use(express.json()); 
+router.use(express.urlencoded({ extended: true }));
 const svc = new ProvinceService();
 
 router.get('', async (req, res) => {
@@ -28,50 +31,57 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('', async (req, res) => {
-    let respuesta;
     const provinceData = req.body;
-    if (!provinceData.name || provinceData.name.length < 3) 
-    {
-        respuesta = res.status(400).send("El nombre es obligatorio y debe tener al menos 3 letras.");
+    
+    if (!provinceData || Object.keys(provinceData).length === 0) {
+        return res.status(400).send("Error: El Body llegó vacío al controlador.");
     }
-    else {
-        try {
-        const returnArray = await svc.createAsync(provinceData);
-        respuesta = res.status(201).json(returnArray);
+
+    if (!provinceData.name || provinceData.name.length < 3) {
+        return res.status(400).send("El nombre es obligatorio y debe tener al menos 3 letras.");
+    }
+
+    try {
+        await svc.createAsync(provinceData);
+        return res.status(201).send("Creado correctamente.");
     } catch (error) {
-        respuesta = res.status(400).send("Error, no se pudo crear la provincia.");
+        console.log(error);
+        return res.status(400).send("Error, no se pudo crear la provincia.");
     }
-    }
-    return respuesta; 
 });
 
 router.put('', async (req, res) => {
-    let respuesta;
     const provinceData = req.body;
+
+    if (!provinceData || Object.keys(provinceData).length === 0) {
+        return res.status(400).send("Error: El Body de la actualización llegó vacío.");
+    }
+
+    if (!provinceData.name || provinceData.name.length < 3) {
+        return res.status(400).send("El nombre es obligatorio y debe tener al menos 3 letras.");
+    }
     
     try {
         const rowsAffected = await svc.updateAsync(provinceData);
         if (rowsAffected > 0) {
-            respuesta = res.status(201).send("Actualizado correctamente.");
+            return res.status(201).send("Actualizado correctamente.");
         } else {
-            respuesta = res.status(404).send("No existe una provincia con ese id.");
+            return res.status(404).send("No existe una provincia con ese id.");
         }
     } catch (error) {   
-        respuesta = res.status(400).send("Error, no se pudo actualizar la provincia.");
+        console.log(error);
+        return res.status(400).send("Error, no se pudo actualizar la provincia.");
     }
-    return respuesta;
 });
 
 router.delete('/:id', async (req, res) => {
-    let respuesta;
     const id = req.params.id;
     const rowsAffected = await svc.deleteByIdAsync(id);
     if(rowsAffected > 0){
-        respuesta = res.status(200).send("Eliminado correctamente.");
+        return res.status(200).send("Eliminado correctamente.");
     } else{
-        respuesta = res.status(404).send(`No se encontró una provincia con ese id.`);
+        return res.status(404).send(`No se encontró una provincia con ese id.`);
     }
-    return respuesta;
 });
 
 export default router;

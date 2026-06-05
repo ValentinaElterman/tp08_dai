@@ -23,7 +23,7 @@ export default class ProvinceRepository {
         const client = new Client(DBConfig);
         try {
             await client.connect();
-            const sql = `SELECT id FROM provinces WHERE id=$1`;
+            const sql = `SELECT * FROM provinces WHERE id=$1`;
             const result = await client.query(sql, [id]);
             await client.end();
             returnArray = result.rows [0] || null;
@@ -70,7 +70,7 @@ export default class ProvinceRepository {
         const client = new Client(DBConfig);
         try {
             await client.connect();
-            const sql = 'DELETE * FROM provinces WHERE id = $1';
+            const sql = 'DELETE FROM provinces WHERE id = $1';
             const result = await client.query(sql, [id]);
             await client.end();
             rowsAffected = result.rowCount;
