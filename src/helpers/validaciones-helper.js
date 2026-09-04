@@ -1,5 +1,5 @@
-import 'dotenv/config' 
-import fs from 'fs';  
+require('dotenv').config();
+const fs = require('fs');
 
 class LogHelper {     
     constructor() {         
@@ -39,4 +39,4 @@ class LogHelper {
         }
     }     
 }
-export default new LogHelper();
+module.exports = new LogHelper();

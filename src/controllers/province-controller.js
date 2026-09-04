@@ -1,7 +1,7 @@
-import {Router} from 'express';
-import express from 'express';
-import ProvinceService from './../services/province-service.js';
-import logHelper from './../helpers/validaciones-helper.js';
+const { Router } = require('express');
+const express = require('express');
+const ProvinceService = require('../services/province-service.js');
+const logHelper = require('../helpers/validaciones-helper.js');
 
 const router = Router();
 router.use(express.json()); 
@@ -9,6 +9,10 @@ router.use(express.urlencoded({ extended: true }));
 const svc = new ProvinceService();
 
 router.get('', async (req, res) => {
+    /*  #swagger.tags = ['Provincias']
+        #swagger.summary = 'Obtiene el listado completo de provincias.'
+        #swagger.responses[200] = { description: 'Lista de provincias obtenida con éxito.', schema: { $ref: '#/definitions/Provincia' } }
+    */
     let respuesta;
     const returnArray = await svc.getAllAsync();
     if(returnArray != null){
@@ -20,6 +24,12 @@ router.get('', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
+    /*  #swagger.tags = ['Provincias']
+        #swagger.summary = 'Obtiene una provincia específica por su ID.'
+        #swagger.parameters['id'] = { description: 'ID de la provincia', type: 'integer' }
+        #swagger.responses[200] = { description: 'Provincia encontrada.', schema: { $ref: '#/definitions/Provincia' } }
+        #swagger.responses[404] = { description: 'Provincia no encontrada.', schema: { $ref: '#/definitions/Provincia' } }
+    */
     let respuesta;
     const id = req.params.id;
     const returnArray = await svc.getByIdAsync(id);
@@ -32,6 +42,23 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('', async (req, res) => {
+    /*  #swagger.tags = ['Provincias']
+        #swagger.summary = 'Crea una nueva provincia.'
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Datos necesarios para crear una provincia',
+            required: true,
+            schema: {
+                name: 'Chaco Provincia',
+                full_name: 'Provincia de Chaco',
+                latitude: -24.895086,
+                longitude: -59.932189,
+                display_order: 100
+            }
+        }
+        #swagger.responses[201] = { description: 'Provincia creada correctamente.', schema: { $ref: '#/definitions/Provincia' } }
+        #swagger.responses[400] = { description: 'Error en validaciones de datos (ej. nombre menor a 3 letras).', schema: { $ref: '#/definitions/Provincia' } }
+    */
     const provinceData = req.body;
     
     if (!provinceData || Object.keys(provinceData).length === 0) {
@@ -52,6 +79,25 @@ router.post('', async (req, res) => {
 });
 
 router.put('', async (req, res) => {
+    /*  #swagger.tags = ['Provincias']
+        #swagger.summary = 'Actualiza la información de una provincia existente.'
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Datos actualizados de la provincia',
+            required: true,
+            schema: {
+                id: 34,
+                name: 'Provincia Modificada',
+                full_name: 'Provincia Modificada',
+                latitude: -24.895086,
+                longitude: -59.932189,
+                display_order: 100
+            }
+        }
+        #swagger.responses[201] = { description: 'Provincia actualizada exitosamente.', schema: { $ref: '#/definitions/Provincia' } }
+        #swagger.responses[400] = { description: 'Error de validación en la solicitud.', schema: { $ref: '#/definitions/Provincia' } }
+        #swagger.responses[404] = { description: 'Provincia no encontrada.', schema: { $ref: '#/definitions/Provincia' } }
+    */
     const provinceData = req.body;
 
     if (!provinceData || Object.keys(provinceData).length === 0) {
@@ -76,6 +122,12 @@ router.put('', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
+    /*  #swagger.tags = ['Provincias']
+        #swagger.summary = 'Elimina una provincia por su ID.'
+        #swagger.parameters['id'] = { description: 'ID de la provincia a eliminar', type: 'integer' }
+        #swagger.responses[200] = { description: 'Provincia eliminada exitosamente.', schema: { $ref: '#/definitions/Provincia' } }
+        #swagger.responses[404] = { description: 'Provincia no encontrada.', schema: { $ref: '#/definitions/Provincia' } }
+    */
     const id = req.params.id;
     const rowsAffected = await svc.deleteByIdAsync(id);
     if(rowsAffected > 0){
@@ -85,4 +137,4 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-export default router;
+module.exports = router;

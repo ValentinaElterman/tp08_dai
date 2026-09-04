@@ -13,40 +13,124 @@
   "paths": {
     "/api/province/{id}": {
       "get": {
+        "tags": [
+          "Provincias"
+        ],
+        "summary": "Obtiene una provincia específica por su ID.",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "description": "ID de la provincia"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Provincia encontrada.",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Provincia no encontrada.",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
           }
         }
       },
       "delete": {
+        "tags": [
+          "Provincias"
+        ],
+        "summary": "Elimina una provincia por su ID.",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "description": "ID de la provincia a eliminar"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Provincia eliminada exitosamente.",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Provincia no encontrada.",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "tags": [
+          "Provincias"
+        ],
+        "summary": "Obtiene una provincia específica por su ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID de la provincia"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provincia encontrada.",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
+          },
+          "404": {
+            "description": "Provincia no encontrada.",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Provincias"
+        ],
+        "summary": "Elimina una provincia por su ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID de la provincia a eliminar"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provincia eliminada exitosamente.",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
+          },
+          "404": {
+            "description": "Provincia no encontrada.",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
           }
         }
       }

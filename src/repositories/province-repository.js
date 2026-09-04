@@ -1,8 +1,7 @@
-import DBConfig from './../configs/db-config.js';
-import pkg from 'pg'
+const DBConfig = require('./../configs/db-config.js');
+const pkg = require('pg');
 const {Client} = pkg; //, Pool en la presentación
-
-export default class ProvinceRepository {
+module.exports = class ProvinceRepository {
     getAllAsync = async () => {
         let returnArray = null;
         const client = new Client(DBConfig);
