@@ -1,5 +1,6 @@
 const DBConfig = require('./../configs/db-config.js');
 const pkg = require('pg');
+const logHelper = require('../helpers/validaciones-helper.js');
 const {Client} = pkg; //, Pool en la presentación
 module.exports = class ProvinceRepository {
     getAllAsync = async () => {
@@ -12,7 +13,7 @@ module.exports = class ProvinceRepository {
             await client.end();
             returnArray = result.rows;
         } catch (error) {
-            console.log(error);
+            logHelper.logError(error);
         }
         return returnArray;
     }

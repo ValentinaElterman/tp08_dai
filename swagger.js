@@ -20,8 +20,8 @@ const doc = {
 };
 
 const outputFile = './swagger_output.json';
-const endpointsFiles= ['./index.js', './src/controllers/province-controller.js']; //cambiar segun el punto de entrada
+const endpointsFiles= ['./index.js'];
 
-swaggerAutogen(outputFile, endpointsFiles).then(() => {
+swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
     require('./index'); //inica el servidor automaticamente
 });

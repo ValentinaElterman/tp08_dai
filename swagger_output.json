@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "API de Provincias",
+    "description": "Documentación de la API para la gestión de provincias",
+    "version": "1.0.0"
   },
   "host": "localhost:3000",
   "basePath": "/",
@@ -11,6 +11,154 @@
     "http"
   ],
   "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/province/": {
+      "get": {
+        "tags": [
+          "Provincias"
+        ],
+        "summary": "Obtiene el listado completo de provincias.",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Lista de provincias obtenida con éxito.",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Provincias"
+        ],
+        "summary": "Crea una nueva provincia.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Datos necesarios para crear una provincia",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Chaco Provincia"
+                },
+                "full_name": {
+                  "type": "string",
+                  "example": "Provincia de Chaco"
+                },
+                "latitude": {
+                  "type": "number",
+                  "example": -24.895086
+                },
+                "longitude": {
+                  "type": "number",
+                  "example": -59.932189
+                },
+                "display_order": {
+                  "type": "number",
+                  "example": 100
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Provincia creada correctamente.",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
+          },
+          "400": {
+            "description": "Error en validaciones de datos (ej. nombre menor a 3 letras).",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Provincias"
+        ],
+        "summary": "Actualiza la información de una provincia existente.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Datos actualizados de la provincia",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 34
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Provincia Modificada"
+                },
+                "full_name": {
+                  "type": "string",
+                  "example": "Provincia Modificada"
+                },
+                "latitude": {
+                  "type": "number",
+                  "example": -24.895086
+                },
+                "longitude": {
+                  "type": "number",
+                  "example": -59.932189
+                },
+                "display_order": {
+                  "type": "number",
+                  "example": 100
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Provincia actualizada exitosamente.",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
+          },
+          "400": {
+            "description": "Error de validación en la solicitud.",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
+          },
+          "404": {
+            "description": "Provincia no encontrada.",
+            "schema": {
+              "$ref": "#/definitions/Provincia"
+            }
+          }
+        }
+      }
+    },
     "/api/province/{id}": {
       "get": {
         "tags": [
@@ -72,66 +220,35 @@
           }
         }
       }
-    },
-    "/{id}": {
-      "get": {
-        "tags": [
-          "Provincias"
-        ],
-        "summary": "Obtiene una provincia específica por su ID.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "description": "ID de la provincia"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Provincia encontrada.",
-            "schema": {
-              "$ref": "#/definitions/Provincia"
-            }
-          },
-          "404": {
-            "description": "Provincia no encontrada.",
-            "schema": {
-              "$ref": "#/definitions/Provincia"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Provincias"
-        ],
-        "summary": "Elimina una provincia por su ID.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "description": "ID de la provincia a eliminar"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Provincia eliminada exitosamente.",
-            "schema": {
-              "$ref": "#/definitions/Provincia"
-            }
-          },
-          "404": {
-            "description": "Provincia no encontrada.",
-            "schema": {
-              "$ref": "#/definitions/Provincia"
-            }
-          }
+    }
+  },
+  "definitions": {
+    "Provincia": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "Buenos Aires"
+        },
+        "full_name": {
+          "type": "string",
+          "example": "Provincia de Buenos Aires"
+        },
+        "latitude": {
+          "type": "number",
+          "example": -34.6
+        },
+        "longitude": {
+          "type": "number",
+          "example": -58.4
+        },
+        "display_order": {
+          "type": "number",
+          "example": 1
         }
       }
     }

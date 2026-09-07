@@ -14,6 +14,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use("/api/province", ProvinceRouter);
 
+app.get('/', (req, res) => {
+    res.status(200).json({
+        message: 'API TP08 - Provincias',
+        docs: '/api-docs',
+        endpoints: '/api/province'
+    });
+});
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });

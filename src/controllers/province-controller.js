@@ -8,7 +8,7 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 const svc = new ProvinceService();
 
-router.get('', async (req, res) => {
+router.get('/', async (req, res) => {
     /*  #swagger.tags = ['Provincias']
         #swagger.summary = 'Obtiene el listado completo de provincias.'
         #swagger.responses[200] = { description: 'Lista de provincias obtenida con éxito.', schema: { $ref: '#/definitions/Provincia' } }
@@ -41,7 +41,7 @@ router.get('/:id', async (req, res) => {
     return respuesta;
 });
 
-router.post('', async (req, res) => {
+router.post('/', async (req, res) => { 
     /*  #swagger.tags = ['Provincias']
         #swagger.summary = 'Crea una nueva provincia.'
         #swagger.parameters['body'] = {
@@ -78,7 +78,7 @@ router.post('', async (req, res) => {
     }
 });
 
-router.put('', async (req, res) => {
+router.put('/', async (req, res) => { 
     /*  #swagger.tags = ['Provincias']
         #swagger.summary = 'Actualiza la información de una provincia existente.'
         #swagger.parameters['body'] = {

@@ -41,3 +41,7 @@ PUT             |    /api/province      |   Actualiza la información de una pro
 --------------------------------------------------------------------------------------
 DELETE          |   /api/province/{id}  |   Elimina una provincia según su ID
 --------------------------------------------------------------------------------------
+
+node swagger.js
+
+http://localhost:3000/api-docs/
