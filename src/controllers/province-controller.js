@@ -82,16 +82,14 @@ router.put('/', async (req, res) => {
     /*  #swagger.tags = ['Provincias']
         #swagger.summary = 'Actualiza la información de una provincia existente.'
         #swagger.parameters['body'] = {
-            in: 'body',
-            description: 'Datos actualizados de la provincia',
-            required: true,
-            schema: {
-                id: 34,
-                name: 'Provincia Modificada',
-                full_name: 'Provincia Modificada',
-                latitude: -24.895086,
-                longitude: -59.932189,
-                display_order: 100
+       in: 'body',
+       schema: {
+           id: 10,
+           name: 'Chaco Provincia',
+           full_name: 'Provincia de Chaco',
+           latitude: -24.895086,
+           longitude: -59.932189,
+           display_order: 100
             }
         }
         #swagger.responses[201] = { description: 'Provincia actualizada exitosamente.', schema: { $ref: '#/definitions/Provincia' } }
