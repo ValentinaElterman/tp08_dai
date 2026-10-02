@@ -49,6 +49,7 @@ router.post('/', async (req, res) => {
             description: 'Datos necesarios para crear una provincia',
             required: true,
             schema: {
+                id: 10,
                 name: 'Chaco Provincia',
                 full_name: 'Provincia de Chaco',
                 latitude: -24.895086,

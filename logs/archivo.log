@@ -1,0 +1,6 @@
+[2026-10-02T11:30:55.031Z] ERROR: error: INSERT tiene más columnas de destino que expresiones
+    at C:\Users\devandroid\tp08_dai\node_modules\pg\lib\client.js:646:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ProvinceRepository.createAsync (C:\Users\devandroid\tp08_dai\src\repositories\province-repository.js:43:28)
+    at async ProvinceService.createAsync (C:\Users\devandroid\tp08_dai\src\services\province-service.js:18:30)
+    at async C:\Users\devandroid\tp08_dai\src\controllers\province-controller.js:74:9

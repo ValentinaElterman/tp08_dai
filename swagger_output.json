@@ -55,6 +55,10 @@
             "schema": {
               "type": "object",
               "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 10
+                },
                 "name": {
                   "type": "string",
                   "example": "Chaco Provincia"
@@ -104,22 +108,20 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Datos actualizados de la provincia",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "id": {
                   "type": "number",
-                  "example": 34
+                  "example": 10
                 },
                 "name": {
                   "type": "string",
-                  "example": "Provincia Modificada"
+                  "example": "Chaco Provincia"
                 },
                 "full_name": {
                   "type": "string",
-                  "example": "Provincia Modificada"
+                  "example": "Provincia de Chaco"
                 },
                 "latitude": {
                   "type": "number",

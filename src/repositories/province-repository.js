@@ -34,19 +34,27 @@ module.exports = class ProvinceRepository {
     }
 
     createAsync = async (provinceData) => {
-        let rowsAffected = 0;
-        const client = new Client(DBConfig);
-        try {
-            await client.connect();
-            const sql = `INSERT INTO provinces (name, full_name, latitude, longitude, display_order) VALUES ($1, $2, $3, $4, $5)`;
-            const values = [provinceData.name, provinceData.full_name, provinceData.latitude, provinceData.longitude, provinceData.display_order];
-            const result = await client.query(sql, values);
-            await client.end();
-            rowsAffected = result.rowCount; //cuantas filas se insertaron
-        } catch (error) {
-            console.log(error);
-        }
-        return rowsAffected;
+    let rowsAffected = 0;
+    const client = new Client(DBConfig);
+    try {
+        await client.connect();
+        const sql = `INSERT INTO provinces (id, name, full_name, latitude, longitude, display_order) VALUES ($1, $2, $3, $4, $5, $6)`;
+        const values = [
+            provinceData.id, 
+            provinceData.name, 
+            provinceData.full_name, 
+            provinceData.latitude, 
+            provinceData.longitude, 
+            provinceData.display_order
+        ];
+        const result = await client.query(sql, values);
+        await client.end();
+        rowsAffected = result.rowCount;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+    return rowsAffected;
     }
 
     updateAsync = async (provinceData) => {
